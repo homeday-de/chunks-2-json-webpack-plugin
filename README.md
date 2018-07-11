@@ -9,7 +9,7 @@ npm i --save-dev chunks-2-json-webpack-plugin
 
 ## Use case
 
-Webpack is a great tool and has witout a doubt revolutionized the way we build frontend applications. However usually, due to the caching strategy, chunck files will have hash appended to their file name. And if you want to use yoru build in an env, that does not know 
+Webpack is a great tool and has without a doubt revolutionized the way we build frontend applications. However usually, due to the (great) caching strategy, chunk files will have hash appended to their file name. And if you want to use your build in an env, that does not know 
 anything about this, it becomes complicated to inject the build in your app.
 
 Therefore this plugin was build, as it will output your chunks in a JSON file, that will 
@@ -47,9 +47,9 @@ module.exports = {
     "jsMap": "/js/chunk-vendors.fc40696c.js.map"
   },
   "app": {
-    "css": "dist/css/app.eb829ccc.css",
-    "js": "/dist/js/app.dd31cdcb.js",
-    "jsMap": "/dist/js/app.dd31cdcb.js.map"
+    "css": "/css/app.eb829ccc.css",
+    "js": "/js/app.dd31cdcb.js",
+    "jsMap": "/js/app.dd31cdcb.js.map"
   }
 }
 ```
