@@ -1,0 +1,27 @@
+{
+  "name": "chunks-2-json-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Plugin for webpack 4, that outputs build files to JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homeday-de/Chunks2JsonPlugin.git"
+  },
+  "keywords": [
+    "webpack4",
+    "dependency",
+    "JSON",
+    "webpack",
+    "file",
+    "list"
+  ],
+  "author": "Sinisa Grubor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/homeday-de/Chunks2JsonPlugin/issues"
+  },
+  "homepage": "https://github.com/homeday-de/Chunks2JsonPlugin#readme"
+}
