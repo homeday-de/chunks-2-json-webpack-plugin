@@ -28,11 +28,11 @@ class Chunks2JsonWebpackPlugin {
                     this.result[chunk.name] = {};
                 }
                 chunk.files.forEach(filename => {
-                    const exclude = typeof options.excludeFile === 'function' ?
-                        options.excludeFile(filename, chunk) :
-                        options.excludeFile.test(filename);
+                    const exclude = typeof this.options.excludeFile === 'function' ?
+                        this.options.excludeFile(filename, chunk) :
+                        this.options.excludeFile.test(filename);
                     if (!exclude) {
-                        const ext = options.chunkGroupName(filename, chunk);
+                        const ext = this.options.chunkGroupName(filename, chunk);
                         if (!this.result[chunk.name][ext]) this.result[chunk.name][ext] = [];
                         this.result[chunk.name][ext].push(this.options.publicPath + filename);
                     }
