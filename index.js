@@ -10,20 +10,15 @@ class Chunks2JsonWebpackPlugin {
     }
     apply(compiler) {
         compiler.hooks.emit.tap(pluginName, compilation => {
-            compilation.chunks.forEach((chunk) => {
-                if (this.result[chunk.name] === undefined) {
+            this.result = {};
+            compilation.chunks.forEach(chunk => {
+                if (!this.result[chunk.name]) {
                     this.result[chunk.name] = {};
                 }
-                chunk.files.forEach((filename) => {
-                    if (filename.endsWith('css')) {
-                        this.result[chunk.name].css = `/${filename}`;
-                    } else if (filename.endsWith('js')) {
-                        this.result[chunk.name].js = `/${filename}`;
-                    } else if (filename.endsWith('js.map')) {
-                        this.result[chunk.name].jsMap = `/${filename}`;
-                    } else if (filename.endsWith('css.map')) {
-                        this.result[chunk.name].cssMap = `/${filename}`;
-                    }
+                chunk.files.forEach(filename => {
+                    const ext = /\.([a-z0-9]+(\.map)?)(\?.*)?$/i.exec(filename)[1];
+                    if (!this.result[chunk.name][ext]) this.result[chunk.name][ext] = [];
+                    this.result[chunk.name][ext].push((this.options.publicPath || '/') + filename);
                 });
             });
             this.saveJson();
