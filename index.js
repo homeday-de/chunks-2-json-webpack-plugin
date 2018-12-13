@@ -16,9 +16,11 @@ class Chunks2JsonWebpackPlugin {
                     this.result[chunk.name] = {};
                 }
                 chunk.files.forEach(filename => {
-                    const ext = /\.([a-z0-9]+(\.map)?)(\?.*)?$/i.exec(filename)[1];
-                    if (!this.result[chunk.name][ext]) this.result[chunk.name][ext] = [];
-                    this.result[chunk.name][ext].push((this.options.publicPath || '/') + filename);
+                    if (!filename.endsWith('.hot-update.js')) {
+                        const ext = /\.([a-z0-9]+(\.map)?)(\?.*)?$/i.exec(filename)[1];
+                        if (!this.result[chunk.name][ext]) this.result[chunk.name][ext] = [];
+                        this.result[chunk.name][ext].push((this.options.publicPath || '/') + filename);
+                    }
                 });
             });
             this.saveJson();
