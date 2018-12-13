@@ -8,11 +8,11 @@ const defaultOptions = {
     excludeFile: /\.hot-update\.js$/,
     // group chunks by extension
     chunkGroupName: filename => /\.([a-z0-9]+(\.map)?)(\?.*)?$/.exec(filename)[1],
-    // generate contents to save to manifest file
-    objectToString: result => JSON.stringify(result),
     outputDir: process.cwd(),
     filename: 'build-manifest.json',
-    publicPath: '/'
+    // generate contents to save to manifest file
+    objectToString: result => JSON.stringify(result),
+    publicPath: ''
 };
 
 class Chunks2JsonWebpackPlugin {
