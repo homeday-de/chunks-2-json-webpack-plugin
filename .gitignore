@@ -62,3 +62,4 @@ typings/
 
 # test output
 /test/js
+/test/coverage

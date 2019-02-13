@@ -8,6 +8,7 @@ install:
 - npm i
 script:
 - npm run test
+- npm run test:coverage
 branches:
   only:
   - master
