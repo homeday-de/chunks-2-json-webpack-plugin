@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/homeday-de/chunks-2-json-webpack-plugin.svg?branch=master)](https://travis-ci.com/homeday-de/chunks-2-json-webpack-plugin) [![Coverage Status](https://coveralls.io/repos/github/homeday-de/chunks-2-json-webpack-plugin/badge.svg?branch=master)](https://coveralls.io/github/homeday-de/chunks-2-json-webpack-plugin?branch=master)
+
 # chunks-2-json-webpack-plugin
 Plugin for webpack 4, that outputs build files to JSON
 
