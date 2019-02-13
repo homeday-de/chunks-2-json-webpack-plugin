@@ -21,12 +21,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(
-      {
-        filename: "[name].[hash].css",
-        chunkFilename: "[id].css"
-      }
-    ),
+    new MiniCssExtractPlugin(),
     new Chunks2JsonPlugin({
       outputDir: `./test/js/${TEST_NAME}`,
       excludeFile:(filename, chunk) => filename.includes('.map'),
