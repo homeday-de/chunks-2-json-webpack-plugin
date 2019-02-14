@@ -64,7 +64,7 @@ module.exports = {
 | Option | Description | Type | Default | Comment |
 | ------------- |-------------| -------------| -------------| -------------| 
 | **excludeFile** | Option to dynamically exclude some of the files | `RegExp` or `Function` with signature `(filename, chunk) => bool` | ` /\.hot-update\.js$/` |  Exclude HMR chunks by default (file names ending with `.hot-update.js`). |
-| **chunkGroupName** | Option to define your own file chunk grouping. | `Function` with signature `(filename, chunk) => string` | `/\.([a-z0-9]+(\.map)?)(\?.*)?$/.exec(filename)[1]` | Group by file extension (or `ext.map`) by default. For example for filename inside one chunk `dist/app.js` the default grouping will be `js: []` and for `dist/app.js.map` it would be `js.map: []` both inside of `app` key |
+| **chunkGroupName** | Option to define your own file chunk grouping. | `Function` with signature `(filename, chunk) => string` | `filename => /\.([a-z0-9]+(\.map)?)(\?.*)?$/.exec(filename)[1]` | Group by file extension (or `ext.map`) by default. For example for filename inside one chunk `dist/app.js` the default grouping will be `js: []` and for `dist/app.js.map` it would be `js.map: []` both inside of `app` key |
 | **outputDir** | Output folder name. If the folder does not exist, we'll try to create it. | `String` | `process.cwd()` | Current working directory by default.  |
 | **filename** | Output file name. | `String` | `build-manifest.json` | |
 | **objectToString** | Function to be used to format the output. | `Function` with signature `(result) => string` | `result => JSON.stringify(result)` | By default we output `JSON`, but you can opt in for any other format as well. Just define your output here and adjust `filename`
