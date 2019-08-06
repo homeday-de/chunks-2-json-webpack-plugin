@@ -1,6 +1,6 @@
 {
   "name": "chunks-2-json-webpack-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Plugin for webpack 4, that outputs build files to JSON",
   "main": "index.js",
   "scripts": {
