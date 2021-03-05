@@ -69,6 +69,7 @@ module.exports = {
 | **filename** | Output file name. | `String` | `build-manifest.json` | |
 | **objectToString** | Function to be used to format the output. | `Function` with signature `(result) => string` | `result => JSON.stringify(result)` | By default we output `JSON`, but you can opt in for any other format as well. Just define your output here and adjust `filename`
 | **publicPath** | String to prepend to all chunk file names. You probably should set it to the same value as `webpackConfig.output.publicPath`. | `String` | `''` | Empty string by default |
+| **showLog** | Prints file creation log | `Boolean` | `true` | True by default |
 
 ## Additional Info
 To better understand your custom options, you can learn more about chunks [here](https://github.com/webpack/docs/wiki/how-to-write-a-plugin#exploring-assets-chunks-modules-and-dependencies).
