@@ -12,7 +12,8 @@ const defaultOptions = {
     filename: 'build-manifest.json',
     // generate contents to save to manifest file
     objectToString: result => JSON.stringify(result),
-    publicPath: ''
+    publicPath: '',
+    showLog: true
 };
 
 class Chunks2JsonWebpackPlugin {
@@ -28,20 +29,30 @@ class Chunks2JsonWebpackPlugin {
                 if (this.result[chunk.name] === undefined) {
                     this.result[chunk.name] = {};
                 }
+
                 chunk.files.forEach(filename => {
-                    if (this._excludeChunk(this.options.excludeFile, filename, chunk) === true) {
-                        return;
-                    }
-                    const ext = this.options.chunkGroupName(filename, chunk);
-                    if (this.result[chunk.name][ext] === undefined) {
-                        this.result[chunk.name][ext] = [];
-                    }
-                    this.result[chunk.name][ext].push(`${this.options.publicPath}${filename}`);
+                    this._processFile(filename, chunk);
+                });
+
+                (chunk.auxiliaryFiles || []).forEach(filename => {
+                    this._processFile(filename, chunk);
                 });
             });
             this.saveJson();
         });
     }
+
+    _processFile(filename, chunk) {
+        if (this._excludeChunk(this.options.excludeFile, filename, chunk) === true) {
+            return;
+        }
+        const ext = this.options.chunkGroupName(filename, chunk);
+        if (this.result[chunk.name][ext] === undefined) {
+            this.result[chunk.name][ext] = [];
+        }
+        this.result[chunk.name][ext].push(`${this.options.publicPath}${filename}`);
+    }
+
     saveJson() {
         // try to create outputDir folder if it is within project root
         if (this._shouldFolderBeCreated(this.options.outputDir) === true) {
@@ -61,10 +72,14 @@ class Chunks2JsonWebpackPlugin {
         const blob = this.options.objectToString(this.result);
         try {
             fs.writeFileSync(file, blob, { flag: 'w' });
-            console.log(`File successfully created - ${file}`);
+            this._showLogFile(file);
         } catch(e) {
             console.error(e);
         }
+    }
+
+    _showLogFile(file) {
+        this.options.showLog && console.log(`File successfully created - ${file}`)
     }
 
     /**
