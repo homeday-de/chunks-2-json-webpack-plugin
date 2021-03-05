@@ -12,7 +12,8 @@ const defaultOptions = {
     filename: 'build-manifest.json',
     // generate contents to save to manifest file
     objectToString: result => JSON.stringify(result),
-    publicPath: ''
+    publicPath: '',
+    showLog: true
 };
 
 class Chunks2JsonWebpackPlugin {
@@ -71,10 +72,14 @@ class Chunks2JsonWebpackPlugin {
         const blob = this.options.objectToString(this.result);
         try {
             fs.writeFileSync(file, blob, { flag: 'w' });
-            console.log(`File successfully created - ${file}`);
+            this._showLogFile(file);
         } catch(e) {
             console.error(e);
         }
+    }
+
+    _showLogFile(file) {
+        this.options.showLog && console.log(`File successfully created - ${file}`)
     }
 
     /**
