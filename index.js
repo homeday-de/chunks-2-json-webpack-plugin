@@ -28,20 +28,30 @@ class Chunks2JsonWebpackPlugin {
                 if (this.result[chunk.name] === undefined) {
                     this.result[chunk.name] = {};
                 }
+
                 chunk.files.forEach(filename => {
-                    if (this._excludeChunk(this.options.excludeFile, filename, chunk) === true) {
-                        return;
-                    }
-                    const ext = this.options.chunkGroupName(filename, chunk);
-                    if (this.result[chunk.name][ext] === undefined) {
-                        this.result[chunk.name][ext] = [];
-                    }
-                    this.result[chunk.name][ext].push(`${this.options.publicPath}${filename}`);
+                    this._processFile(filename, chunk);
+                });
+
+                (chunk.auxiliaryFiles || []).forEach(filename => {
+                    this._processFile(filename, chunk);
                 });
             });
             this.saveJson();
         });
     }
+
+    _processFile(filename, chunk) {
+        if (this._excludeChunk(this.options.excludeFile, filename, chunk) === true) {
+            return;
+        }
+        const ext = this.options.chunkGroupName(filename, chunk);
+        if (this.result[chunk.name][ext] === undefined) {
+            this.result[chunk.name][ext] = [];
+        }
+        this.result[chunk.name][ext].push(`${this.options.publicPath}${filename}`);
+    }
+
     saveJson() {
         // try to create outputDir folder if it is within project root
         if (this._shouldFolderBeCreated(this.options.outputDir) === true) {
